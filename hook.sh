@@ -33,7 +33,7 @@ case "$1" in
     TLD=$(echo -n "$2" | rev | cut -d '.' -f 1 | rev)
 
     RESPONSE=$(curl -X POST -H 'Connection: close' --silent \
-                    --data "klantId=${CUSTOMER_ID}&klantPw=${CUSTOMER_PW}&sandBox=${USE_TEST}&command=DomainsDNSAddRecord&domain=${DOMAIN}&tld=${TLD}&ttl=${TTL}&name=_acme-challenge.${SUBDOMAIN}&type=TXT&value=$4" \
+                    --data "klantId=${CUSTOMER_ID}&klantPw=${CUSTOMER_PW}&sandBox=${USE_TEST}&command=DomainsDNSAddRecord&domain=${DOMAIN}&tld=${TLD}&ttl=${TTL}&name=_acme-challenge.${SUBDOMAIN}.${DOMAIN}.${TLD}&type=TXT&value=$4" \
                     ${VERSIO_ENDPOINT})
 
     SUCCESS=$(echo -en "$RESPONSE" | head -n 1 |  cut -d ' ' -f 1 | cut -d '=' -f 2)
